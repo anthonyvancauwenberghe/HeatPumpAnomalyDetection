@@ -1,4 +1,4 @@
-package graphs.HeatPump;
+package graphs.heatpump;
 
 import abstracts.AbstractLineTraceFactory;
 import abstracts.Graph;

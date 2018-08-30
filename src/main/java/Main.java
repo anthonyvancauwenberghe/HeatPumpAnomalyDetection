@@ -1,5 +1,5 @@
 import abstracts.Graph;
-import graphs.HeatPump.HeatPumpDataGraph;
+import graphs.heatpump.HeatPumpDataGraph;
 import importer.CSVImporter;
 import io.sentry.Sentry;
 import io.sentry.SentryClientFactory;
