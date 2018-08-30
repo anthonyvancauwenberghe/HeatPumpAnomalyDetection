@@ -1,6 +1,6 @@
 package logic.models;
 
-import Enums.Tag;
+import enums.Tag;
 import models.HeatPumpDataPoint;
 import org.joda.time.DateTime;
 import org.joda.time.Seconds;

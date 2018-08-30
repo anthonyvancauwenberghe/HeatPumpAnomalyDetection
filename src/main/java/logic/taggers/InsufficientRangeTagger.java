@@ -1,6 +1,6 @@
 package logic.taggers;
 
-import Enums.Tag;
+import enums.Tag;
 import abstracts.Tagger;
 import configs.TagConfig;
 import logic.models.HeatPumpDataRange;
