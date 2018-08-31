@@ -12,7 +12,7 @@ public class HeatPumpRangeDataAverageTimeSeriesTraceFactory extends AbstractLine
     private List<HeatPumpDataRange> dataPoints;
 
     public HeatPumpRangeDataAverageTimeSeriesTraceFactory(List<HeatPumpDataRange> dataPoints) {
-        super("Average On Phase", TraceColour.RED, new LineTrace());
+        super("Average On Phase", TraceColour.PURPLE, new LineTrace());
         this.dataPoints = dataPoints;
     }
 
@@ -41,7 +41,7 @@ public class HeatPumpRangeDataAverageTimeSeriesTraceFactory extends AbstractLine
             counter++;
         }
 
-        this.appendTitle(stats.getMean() + " || " + stats.getStandardDeviation());
+        this.appendTitle(" " +stats.getMean() + " || " + stats.getStandardDeviation());
         return data;
     }
 }

@@ -2,7 +2,7 @@ package configs;
 
 public class TagConfig {
 
-    public static int MinimumInsufficientRangeDuration = 15;
+    public static final int MinimumInsufficientRangeDuration = FluctuationRateConfig.minRangeDurationToEstablishFluctuation;
 
-    public static int MinimumInsufficientRangeDataPointsAmount = 5;
+    public static final int MinimumInsufficientRangeDataPointsAmount = FluctuationRateConfig.minRangePointsToEstablishFluctuation;
 }

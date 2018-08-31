@@ -6,6 +6,7 @@ import org.apache.commons.math.stat.descriptive.DescriptiveStatistics;
 import org.joda.time.DateTime;
 import org.joda.time.Seconds;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
@@ -13,7 +14,7 @@ public class HeatPumpDataRange {
 
     private List<HeatPumpDataPoint> dataPoints;
 
-    private List<Tag> tags;
+    private List<Tag> tags = new ArrayList<>();
 
     public HeatPumpDataRange(List<HeatPumpDataPoint> dataPoints) {
         this.dataPoints = dataPoints;
@@ -68,7 +69,7 @@ public class HeatPumpDataRange {
         return stats.getMean();
     }
 
-    public double getCleanWeightedMean(){
+    public double getCleanWeightedMean() {
         DescriptiveStatistics stats = getStatisticsObject();
         for (HeatPumpDataPoint dataPoint : this.dataPoints) {
             if (dataPoint.value >= this.getWeightedMean())

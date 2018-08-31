@@ -8,17 +8,18 @@ import org.charts.dataviewer.utils.TraceColour;
 
 import java.util.List;
 
-public class HeatPumpRangeDataAverageStatisticsTimeSeriesTraceFactory extends AbstractLineTraceFactory {
+public class HeatPumpRangeDataGlobalAverageTraceFactory extends AbstractLineTraceFactory {
     private List<HeatPumpDataRange> dataPoints;
 
-    public HeatPumpRangeDataAverageStatisticsTimeSeriesTraceFactory(List<HeatPumpDataRange> dataPoints) {
-        super("Clean Average", TraceColour.GREEN, new LineTrace());
+    public HeatPumpRangeDataGlobalAverageTraceFactory(List<HeatPumpDataRange> dataPoints) {
+        super("GLOBAL CLEAN AVERAGE", TraceColour.BLACK, new LineTrace());
         this.dataPoints = dataPoints;
     }
 
     @Override
     public Long[] getXData() {
         Long[] data = new Long[dataPoints.size()];
+
 
         int counter = 0;
         for (HeatPumpDataRange dataPoint : dataPoints) {
@@ -32,17 +33,15 @@ public class HeatPumpRangeDataAverageStatisticsTimeSeriesTraceFactory extends Ab
     public Double[] getYData() {
         Double[] data = new Double[dataPoints.size()];
 
-        int counter = 0;
         DescriptiveStatistics stats = new DescriptiveStatistics();
         for (HeatPumpDataRange dataPoint : dataPoints) {
-            data[counter] = dataPoint.getCleanWeightedMean();
-            stats.addValue(data[counter]);
+            stats.addValue(dataPoint.getCleanWeightedMean());
+        }
+        int counter = 0;
+        for (HeatPumpDataRange dataPoint : dataPoints) {
+            data[counter] = stats.getMean();
             counter++;
         }
-
-        System.out.println("fluctuation ratio:" + stats.getStandardDeviation() / stats.getMean());
-
-        this.appendTitle(" " +stats.getMean() + " || " + stats.getStandardDeviation() + " || " + stats.getStandardDeviation() / stats.getMean());
         return data;
     }
 }

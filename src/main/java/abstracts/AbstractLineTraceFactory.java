@@ -9,7 +9,7 @@ public abstract class AbstractLineTraceFactory<T> {
 
     private TraceColour color;
 
-    private GenericTrace trace;
+    protected GenericTrace trace;
 
 
     public AbstractLineTraceFactory(String title, TraceColour color, GenericTrace trace) {
@@ -23,15 +23,15 @@ public abstract class AbstractLineTraceFactory<T> {
     public abstract T[] getYData();
 
     public GenericTrace<T> build() {
-        GenericTrace<T> lineTrace = this.trace;
-        lineTrace.setxArray(this.getXData());
-        lineTrace.setyArray(this.getYData());
-        lineTrace.setTraceName(this.title);
-        lineTrace.setTraceColour(this.color);
-        return lineTrace;
+        GenericTrace<T> trace = this.trace;
+        trace.setxArray(this.getXData());
+        trace.setyArray(this.getYData());
+        trace.setTraceName(this.title);
+        trace.setTraceColour(this.color);
+        return trace;
     }
 
     protected void appendTitle(String message) {
-        this.title = this.title + " " + message;
+        this.title = this.title + message;
     }
 }

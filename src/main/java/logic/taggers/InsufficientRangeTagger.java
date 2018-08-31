@@ -13,11 +13,11 @@ public class InsufficientRangeTagger extends Tagger {
 
     public void tag() {
 
-        if (this.range.size() < TagConfig.MinimumInsufficientRangeDataPointsAmount) {
+        if (this.range.size() <= TagConfig.MinimumInsufficientRangeDataPointsAmount) {
             range.addTag(Tag.INSUFFICIENT_DATAPOINT_AMOUNT);
         }
 
-        if (this.range.getRangeDurationInMinutes() < TagConfig.MinimumInsufficientRangeDuration) {
+        if (this.range.getRangeDurationInMinutes() <= TagConfig.MinimumInsufficientRangeDuration) {
             range.addTag(Tag.INSUFFICIENT_RANGE_DURATION);
         }
 

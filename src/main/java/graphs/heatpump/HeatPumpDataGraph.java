@@ -2,9 +2,7 @@ package graphs.heatpump;
 
 import abstracts.AbstractLineTraceFactory;
 import abstracts.Graph;
-import graphs.heatpump.traces.HeatPumpDataTimeSeriesTraceFactory;
-import graphs.heatpump.traces.HeatPumpRangeDataAverageStatisticsTimeSeriesTraceFactory;
-import graphs.heatpump.traces.HeatPumpRangeDataAverageTimeSeriesTraceFactory;
+import graphs.heatpump.traces.*;
 import logic.calculator.PumpOnTresholdCalculator;
 import logic.extractors.PumpUnderLoadRangeExtractor;
 import logic.models.HeatPumpDataRange;
@@ -38,9 +36,13 @@ public class HeatPumpDataGraph extends Graph {
 
         AbstractLineTraceFactory lineTraceAverageFactory = new HeatPumpRangeDataAverageTimeSeriesTraceFactory(ranges);
 
+        AbstractLineTraceFactory lineTraceGlobalAverageFactory = new HeatPumpRangeDataGlobalAverageTraceFactory(ranges);
+
         AbstractLineTraceFactory lineTraceCleanAverageFactory = new HeatPumpRangeDataAverageStatisticsTimeSeriesTraceFactory(ranges);
 
+        AbstractLineTraceFactory lineTraceRangeFluctuationRateFactory = new HeatPumpRangeDataErrorMarginTimeSeriesTraceFactory(ranges);
 
-        return new PlotData(lineTraceDataFactory.build(), lineTraceAverageFactory.build(), lineTraceCleanAverageFactory.build());
+
+        return new PlotData(lineTraceDataFactory.build(), lineTraceAverageFactory.build(), lineTraceGlobalAverageFactory.build(), lineTraceCleanAverageFactory.build(), lineTraceRangeFluctuationRateFactory.build());
     }
 }
