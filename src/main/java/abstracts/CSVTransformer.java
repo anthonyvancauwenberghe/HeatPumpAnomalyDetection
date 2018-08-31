@@ -1,5 +1,5 @@
 package abstracts;
 
-public abstract class CSVTransformer<T> implements Transformable<T> {
+public abstract class CSVTransformer implements Transformable {
 
 }

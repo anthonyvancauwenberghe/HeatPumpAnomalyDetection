@@ -24,10 +24,14 @@ public abstract class AbstractLineTraceFactory<T> {
 
     public GenericTrace<T> build() {
         GenericTrace<T> lineTrace = this.trace;
-        lineTrace.setTraceName(this.title);
         lineTrace.setxArray(this.getXData());
         lineTrace.setyArray(this.getYData());
+        lineTrace.setTraceName(this.title);
         lineTrace.setTraceColour(this.color);
         return lineTrace;
+    }
+
+    protected void appendTitle(String message) {
+        this.title = this.title + " " + message;
     }
 }

@@ -3,7 +3,8 @@ package enums;
 public enum Tag {
 
     INSUFFICIENT_DATAPOINT_AMOUNT(0, "Insufficient DataPoints in Range To Analyze anomalies"),
-    INSUFFICIENT_RANGE_DURATION(1, "Insufficient duration in Range To Analyze anomalies ");
+    INSUFFICIENT_RANGE_DURATION(1, "Insufficient duration in Range To Analyze anomalies "),
+    ;
 
     private final int code;
 
@@ -21,4 +22,5 @@ public enum Tag {
     public String getMessage() {
         return message;
     }
+
 }

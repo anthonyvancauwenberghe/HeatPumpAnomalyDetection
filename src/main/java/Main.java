@@ -1,6 +1,8 @@
 import abstracts.Graph;
 import graphs.heatpump.HeatPumpDataGraph;
 import importer.CSVImporter;
+import importer.transformers.HeatPumpDataPointTransformer2;
+import importer.transformers.HeatPumpDataPointTransformer3;
 import io.sentry.Sentry;
 import io.sentry.SentryClientFactory;
 import logic.LogicKernel;
@@ -12,7 +14,7 @@ import java.util.List;
 public class Main {
 
     public static void testHeatPumpData() throws IOException {
-        CSVImporter<HeatPumpDataPoint> importer = new CSVImporter<>("/home/arthur/IdeaProjects/bynubiananomalydetection/data/Heatpump.csv", new HeatPumpDataPoint("", 0, 0));
+        CSVImporter<HeatPumpDataPoint> importer = new CSVImporter<>("/home/arthur/IdeaProjects/bynubiananomalydetection/data/normalData.csv", new HeatPumpDataPointTransformer2());
 
         List<HeatPumpDataPoint> data = importer.processImport();
 
@@ -20,8 +22,15 @@ public class Main {
         kernel.run();
     }
 
-    public static void renderHeatPumpGraph() throws IOException {
-        CSVImporter<HeatPumpDataPoint> importer = new CSVImporter<>("/home/arthur/IdeaProjects/bynubiananomalydetection/data/Heatpump.csv", new HeatPumpDataPoint("", 0, 0));
+    public static void renderNormalHeatPumpGraph() throws IOException {
+        CSVImporter<HeatPumpDataPoint> importer = new CSVImporter<>("/home/arthur/IdeaProjects/bynubiananomalydetection/data/normalData.csv", new HeatPumpDataPointTransformer2());
+        List<HeatPumpDataPoint> list = importer.processImport();
+        Graph graph = new HeatPumpDataGraph(list);
+        graph.render();
+    }
+
+    public static void renderAbnormalHeatPumpGraph() throws IOException {
+        CSVImporter<HeatPumpDataPoint> importer = new CSVImporter<>("/home/arthur/IdeaProjects/bynubiananomalydetection/data/abnormalData.csv", new HeatPumpDataPointTransformer3());
         List<HeatPumpDataPoint> list = importer.processImport();
         Graph graph = new HeatPumpDataGraph(list);
         graph.render();
@@ -30,8 +39,9 @@ public class Main {
     public static void main(String... args) throws Exception {
 
         initSentry();
-        //renderHeatPumpGraph();
-        testHeatPumpData();
+        renderNormalHeatPumpGraph();
+        //renderAbnormalHeatPumpGraph();
+        //testHeatPumpData();
     }
 
     private static void initSentry() {

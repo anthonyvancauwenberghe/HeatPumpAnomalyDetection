@@ -1,8 +1,6 @@
 package importer;
 
 import abstracts.CSVTransformer;
-import importer.transformers.HeatPumpDataPointTransformer;
-import models.HeatPumpDataPoint;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVRecord;
 
@@ -17,11 +15,11 @@ public class CSVImporter<T> {
 
     private String path;
 
-    private T typeClass;
+    private CSVTransformer transformer;
 
-    public CSVImporter(String path, T typeClass) {
+    public CSVImporter(String path, CSVTransformer transformer) {
         this.path = path;
-        this.typeClass = typeClass;
+        this.transformer = transformer;
     }
 
     public List<T> processImport() throws IOException {
@@ -29,17 +27,10 @@ public class CSVImporter<T> {
         try (org.apache.commons.csv.CSVParser csvParser = new org.apache.commons.csv.CSVParser(reader, CSVFormat.DEFAULT)) {
             List<T> list = new ArrayList<>();
 
-            CSVTransformer<T> transformer;
-            if (this.typeClass instanceof HeatPumpDataPoint) {
-                transformer = new HeatPumpDataPointTransformer();
-            } else {
-                throw new RuntimeException("No such datapoint type found");
-            }
-
             int counter = 0;
             for (CSVRecord csvRecord : csvParser) {
                 if (counter != 0)
-                    list.add(transformer.transform(csvRecord));
+                    list.add((T) transformer.transform(csvRecord));
                 counter++;
             }
             return list;

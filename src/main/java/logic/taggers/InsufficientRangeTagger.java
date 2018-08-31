@@ -12,15 +12,13 @@ public class InsufficientRangeTagger extends Tagger {
     }
 
     public void tag() {
-        boolean rangeSizeInsufficient = false;
-        boolean rangeDurationInsufficient = false;
 
         if (this.range.size() < TagConfig.MinimumInsufficientRangeDataPointsAmount) {
-            rangeSizeInsufficient = true;
+            range.addTag(Tag.INSUFFICIENT_DATAPOINT_AMOUNT);
         }
 
         if (this.range.getRangeDurationInMinutes() < TagConfig.MinimumInsufficientRangeDuration) {
-            rangeDurationInsufficient = true;
+            range.addTag(Tag.INSUFFICIENT_RANGE_DURATION);
         }
 
         /*for (HeatPumpDataPoint dataPoint : range.getDataPoints()) {
@@ -31,14 +29,5 @@ public class InsufficientRangeTagger extends Tagger {
                 dataPoint.addTag(Tag.INSUFFICIENT_DATAPOINT_AMOUNT);
             }
         }*/
-
-        if (rangeDurationInsufficient) {
-            range.addTag(Tag.INSUFFICIENT_RANGE_DURATION);
-            this.range.inSufficientDataRange = true;
-        }
-        if (rangeSizeInsufficient) {
-            range.addTag(Tag.INSUFFICIENT_DATAPOINT_AMOUNT);
-            this.range.inSufficientDataRange = true;
-        }
     }
 }
